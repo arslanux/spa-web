@@ -6,7 +6,7 @@ const services = [
     id: 1,
     name: "Aroma Therapy",
     description: "Experience the healing power of essential oils that soothe both body and mind.",
-    image: "/src/components/img/374.jpg",
+    image: "/src/components/img/aroma_massage.jpg",
     pricing: {
       "45 min": "1200/-",
       "60 min": "1500/-",
@@ -19,7 +19,7 @@ const services = [
     id: 2,
     name: "Swedish Massage",
     description: "A classic technique using long strokes and kneading to relieve muscle tension and promote relaxation.",
-    image: "https://img.freepik.com/free-photo/side-view-woman-working-spa_23-2150911800.jpg?t=st=1745844645~exp=1745848245~hmac=c61ad520d8720b3c7bc7a0b0371af4d83004e4e991b712ca730b2e4c58eb9ac5&w=2000",
+    image: "/src/components/img/swedish_massage.jpg",
     pricing: {
       "45 min": "1300/-",
       "60 min": "1600/-",
@@ -32,7 +32,7 @@ const services = [
     id: 3,
     name: "Deep Tissue Massage",
     description: "Targets deeper layers of muscle to address chronic pain and tension patterns.",
-    image: "/src/components/img/deep.jpg",
+    image: "/src/components/img/deep_tissue_massage.jpg",
     pricing: {
       "45 min": "1500/-",
       "60 min": "1800/-",
@@ -45,7 +45,7 @@ const services = [
     id: 4,
     name: "Balinese Massage",
     description: "A full-body, deep-tissue holistic treatment combining acupressure, aromatherapy, and reflexology.",
-    image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874",
+    image: "/src/components/img/balinese_massage.jpg",
     pricing: {
       "45 min": "1500/-",
       "60 min": "1800/-",
@@ -58,7 +58,7 @@ const services = [
     id: 5,
     name: "Thai Massage",
     description: "Ancient healing system combining acupressure, Indian Ayurvedic principles, and assisted yoga postures.",
-    image: "/src/components/img/374.jpg",
+    image: "/src/components/img/thai_massage.jpg",
     pricing: {
       "45 min": "1800/-",
       "60 min": "2200/-",
@@ -71,8 +71,8 @@ const services = [
     id: 6,
     name: "Stress Relief Therapy",
     description: "Specialized techniques to release tension and promote deep relaxation for mind and body.",
-    image: "https://images.unsplash.com/photo-1535268647677-300dbf3d78d1",
-    pricing: {
+    image: "/src/components/img/stress_relief_therapy.jpg",
+    pricing: { 
       "90 min": "3500/-",
       "120 min": "5000/-"
     },
@@ -82,7 +82,7 @@ const services = [
     id: 7,
     name: "Wine Massage",
     description: "Luxurious treatment utilizing the antioxidant properties of wine extracts for skin rejuvenation.",
-    image: "https://images.unsplash.com/photo-1470337458703-46ad1756a187",
+    image: "/src/components/img/wine_massage.jpg",
     pricing: {
       "45 min": "2000/-",
       "60 min": "2500/-",
@@ -95,7 +95,7 @@ const services = [
     id: 8,
     name: "Chocolate Massage",
     description: "Indulgent therapy using cocoa's natural properties to nourish skin and elevate mood.",
-    image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9",
+    image: "/src/components/img/chocolate_massage.jpg",
     pricing: {
       "60 min": "2000/-",
       "90 min": "3000/-",
@@ -107,7 +107,7 @@ const services = [
     id: 9,
     name: "Body Polishing",
     description: "Exfoliating treatment that removes dead skin cells, revealing soft, glowing skin.",
-    image: "https://images.unsplash.com/photo-1601301550268-8e0518c38d88",
+    image: "/src/components/img/body_polishing.jpg",
     pricing: {
       "90 min": "4000/-",
       "120 min": "5000/-"
@@ -118,7 +118,7 @@ const services = [
     id: 10,
     name: "Signature Massage",
     description: "Our exclusive blend of techniques customized to provide the ultimate relaxation experience.",
-    image: "https://images.unsplash.com/photo-1591343395082-e120087004b4",
+    image: "/src/components/img/signature_massage.jpg",
     pricing: {
       "45 min": "2000/-",
       "60 min": "2500/-",
@@ -131,7 +131,7 @@ const services = [
     id: 11,
     name: "Maharaja Massage",
     description: "Royal treatment inspired by ancient Indian traditions, designed for complete rejuvenation.",
-    image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881",
+    image: "/src/components/img/maharaja_massage.jpg",
     pricing: {
       "90 min": "5000/-",
       "120 min": "7000/-"
@@ -142,7 +142,7 @@ const services = [
     id: 12,
     name: "D Tan + Scrub + Foot Massage",
     description: "Comprehensive package to remove tan, exfoliate skin, and relieve tired feet.",
-    image: "https://images.unsplash.com/photo-1519415510236-718bdfcd89c8",
+    image: "/src/components/img/dtan_scrub_foot_massage.jpg",
     pricing: {
       "45 min": "2000/-",
       "60 min": "2500/-",
