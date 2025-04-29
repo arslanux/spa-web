@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { useCallback } from "react";
 
-const BACKGROUND_IMAGE_URL = "https://img.freepik.com/free-photo/attractive-african-woman-enjoying-face-massage-spa-salon_176420-13955.jpg?t=st=1745835447~exp=1745839047~hmac=172ca82497bc6bee142d2f39a809b2b8fc0127d11f14ae19c78d337ed704dc9f&w=2000";
+const BACKGROUND_IMAGE_URL = "/src/components/img/banner_section.jpg";
 
 const HeroSection = () => {
   // Smooth scroll to booking section
@@ -32,8 +32,9 @@ const HeroSection = () => {
             Luxury Spa Experience in Bangalore
           </h1>
           <p className="mb-8 text-lg text-white/90 md:text-xl">
-            Indulge in a world of relaxation and rejuvenation at Royal S Unisex Salon & Spa. 
-            Where every treatment is designed to soothe your body and mind.
+            Indulge in a world of relaxation and rejuvenation at Royal S Unisex
+            Salon & Spa. Where every treatment is designed to soothe your body
+            and mind.
           </p>
           <Button
             onClick={scrollToBooking}

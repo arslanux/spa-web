@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,6 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import emailjs from "@emailjs/browser"; // Import @emailjs/browser
 
 const BookingSection = () => {
   const { toast } = useToast();
@@ -19,50 +19,85 @@ const BookingSection = () => {
     email: "",
     date: "",
     time: "",
-    service: ""
+    service: "",
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setBookingData(prev => ({
+    setBookingData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSelectChange = (name: string, value: string) => {
-    setBookingData(prev => ({
+    setBookingData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real implementation, you would send this data to a server
-    console.log("Booking submitted:", bookingData);
-    toast({
-      title: "Booking Request Sent!",
-      description: "We'll confirm your appointment shortly.",
-      duration: 5000,
-    });
+
+    // Send email using EmailJS
+    const templateParams = {
+      name: bookingData.name,
+      phone: bookingData.phone,
+      email_address: bookingData.email,
+      service_opted: bookingData.service,
+      preferred_date: bookingData.date,
+      preferred_time: bookingData.time,
+    };
+
+    emailjs
+      .send(
+        import.meta.env.VITE_SERVICE_ID, // Replace with your service ID
+        import.meta.env.VITE_TEMPLATE_ID, // Replace with your template ID
+        templateParams,
+        import.meta.env.VITE_PUBLIC_ID // Replace with your PUBLIC ID
+      )
+      .then(
+        (response) => {
+          console.log("SUCCESS", response);
+          toast({
+            title: "Booking Request Sent!",
+            description: "We'll confirm your appointment shortly.",
+            duration: 5000,
+          });
+        },
+        (error) => {
+          console.log("FAILED", error);
+          toast({
+            title: "Error",
+            description:
+              "There was an issue sending your request. Please try again later.",
+            duration: 5000,
+          });
+        }
+      );
+
+    // Reset the form
     setBookingData({
       name: "",
       phone: "",
       email: "",
       date: "",
       time: "",
-      service: ""
+      service: "",
     });
   };
 
   return (
     <section id="booking" className="section-padding bg-spa-dark">
-      <div 
+      <div
         className="absolute inset-0 bg-cover bg-center opacity-20 z-0"
-        style={{ backgroundImage: "url('https://images.unsplash.com/photo-1600334129128-685c5582fd35?q=80&w=2070&auto=format&fit=crop')" }}
+        style={{
+          backgroundImage:
+            "url('https://images.unsplash.com/photo-1600334129128-685c5582fd35?q=80&w=2070&auto=format&fit=crop')",
+        }}
       ></div>
-      
+
       <div className="container mx-auto relative z-10">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-semibold text-white mb-4 heading-decoration">
@@ -72,15 +107,22 @@ const BookingSection = () => {
             Relax. Rejuvenate. Repeat.
           </p>
           <p className="text-lg text-white/70 max-w-3xl mx-auto mt-4">
-            Take a moment for yourself and schedule a rejuvenating spa experience.
+            Take a moment for yourself and schedule a rejuvenating spa
+            experience.
           </p>
         </div>
 
         <div className="max-w-3xl mx-auto">
-          <form onSubmit={handleSubmit} className="bg-white bg-opacity-95 p-8 rounded-lg shadow-xl">
+          <form
+            onSubmit={handleSubmit}
+            className="bg-white bg-opacity-95 p-8 rounded-lg shadow-xl"
+          >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-spa-dark mb-1">
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-spa-dark mb-1"
+                >
                   Your Name
                 </label>
                 <Input
@@ -93,9 +135,12 @@ const BookingSection = () => {
                   className="w-full"
                 />
               </div>
-              
+
               <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-spa-dark mb-1">
+                <label
+                  htmlFor="phone"
+                  className="block text-sm font-medium text-spa-dark mb-1"
+                >
                   Phone Number
                 </label>
                 <Input
@@ -108,9 +153,12 @@ const BookingSection = () => {
                   className="w-full"
                 />
               </div>
-              
+
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-spa-dark mb-1">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-spa-dark mb-1"
+                >
                   Email Address
                 </label>
                 <Input
@@ -124,52 +172,82 @@ const BookingSection = () => {
                   className="w-full"
                 />
               </div>
-              
+
               <div>
-                <label htmlFor="service" className="block text-sm font-medium text-spa-dark mb-1">
+                <label
+                  htmlFor="service"
+                  className="block text-sm font-medium text-spa-dark mb-1"
+                >
                   Select Service
                 </label>
                 <Select
                   value={bookingData.service}
-                  onValueChange={(value) => handleSelectChange("service", value)}
+                  onValueChange={(value) =>
+                    handleSelectChange("service", value)
+                  }
                 >
                   <SelectTrigger id="service" className="w-full">
                     <SelectValue placeholder="Choose a service" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="aromatherapy">Aroma Therapy</SelectItem>
-                    <SelectItem value="swedish">Swedish Massage</SelectItem>
-                    <SelectItem value="deeptissue">Deep Tissue Massage</SelectItem>
-                    <SelectItem value="balinese">Balinese Massage</SelectItem>
-                    <SelectItem value="thai">Thai Massage</SelectItem>
-                    <SelectItem value="stress">Stress Relief Therapy</SelectItem>
-                    <SelectItem value="wine">Wine Massage</SelectItem>
-                    <SelectItem value="chocolate">Chocolate Massage</SelectItem>
-                    <SelectItem value="polish">Body Polishing</SelectItem>
-                    <SelectItem value="signature">Signature Massage</SelectItem>
-                    <SelectItem value="maharaja">Maharaja Massage</SelectItem>
-                    <SelectItem value="combo">D Tan + Scrub + Foot Massage</SelectItem>
+                    <SelectItem value="Aroma Therapy">Aroma Therapy</SelectItem>
+                    <SelectItem value="Swedish Massage">
+                      Swedish Massage
+                    </SelectItem>
+                    <SelectItem value="Deep Tissue Massage">
+                      Deep Tissue Massage
+                    </SelectItem>
+                    <SelectItem value="Balinese Massage">
+                      Balinese Massage
+                    </SelectItem>
+                    <SelectItem value="Thai Massage">Thai Massage</SelectItem>
+                    <SelectItem value=" Stress Relief Therapy">
+                      Stress Relief Therapy
+                    </SelectItem>
+                    <SelectItem value="Wine Massage">Wine Massage</SelectItem>
+                    <SelectItem value="Chocolate Massage">
+                      Chocolate Massage
+                    </SelectItem>
+                    <SelectItem value="Body Polishing">
+                      Body Polishing
+                    </SelectItem>
+                    <SelectItem value="Signature Massage">
+                      Signature Massage
+                    </SelectItem>
+                    <SelectItem value="Maharaja Massage">
+                      Maharaja Massage
+                    </SelectItem>
+                    <SelectItem value="D Tan + Scrub + Foot Massage">
+                      D Tan + Scrub + Foot Massage
+                    </SelectItem>
                   </SelectContent>
                 </Select>
               </div>
-              
+
               <div>
-                <label htmlFor="date" className="block text-sm font-medium text-spa-dark mb-1">
+                <label
+                  htmlFor="date"
+                  className="block text-sm font-medium text-spa-dark mb-1"
+                >
                   Preferred Date
                 </label>
                 <Input
                   id="date"
                   name="date"
                   type="date"
+                  min={new Date().toISOString().split("T")[0]}
                   value={bookingData.date}
                   onChange={handleInputChange}
                   required
                   className="w-full"
                 />
               </div>
-              
+
               <div>
-                <label htmlFor="time" className="block text-sm font-medium text-spa-dark mb-1">
+                <label
+                  htmlFor="time"
+                  className="block text-sm font-medium text-spa-dark mb-1"
+                >
                   Preferred Time
                 </label>
                 <Select
@@ -194,10 +272,10 @@ const BookingSection = () => {
                 </Select>
               </div>
             </div>
-            
+
             <div className="mt-8">
-              <Button 
-                type="submit" 
+              <Button
+                type="submit"
                 className="w-full bg-spa-gold hover:bg-opacity-90 text-white border-none py-6 text-lg"
               >
                 Book Your Appointment
